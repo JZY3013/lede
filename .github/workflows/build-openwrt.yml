@@ -58,17 +58,17 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
-      env:
-        CONFIG_FILE: '.config'
-        DIY_SH: 'diy.sh'
-      run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        ../$DIY_SH
-        make defconfig
+   #  - name: Load custom configuration
+   #    env:
+   #      CONFIG_FILE: '.config'
+   #      DIY_SH: 'diy.sh'
+   #    run: |
+   #      [ -e files ] && mv files openwrt/files
+   #      [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+   #      chmod +x $DIY_SH
+   #      cd openwrt
+   #      ../$DIY_SH
+   #      make defconfig
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
@@ -89,7 +89,7 @@ jobs:
       if: failure()
       run: |
         cd openwrt
-        make -j1 V=s
+        make V=s
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
