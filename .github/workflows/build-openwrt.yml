@@ -85,11 +85,11 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
 
-    - name: Single-thread compile
-      if: failure()
-      run: |
-        cd openwrt
-        make V=s
+    # - name: Single-thread compile
+    #   if: failure()
+    #   run: |
+    #     cd openwrt
+    #     make V=s
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
